@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="raw">
+    <div class="col-md-6">
+        <div class="media" *ngFor="let pro of products"  style="float: left;">
+            <div class="media-left">
+                <img class="media-object" width="150" height="150" src="{{pro.imageUrl}}">
+            </div>
+            <div class="media-body">
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        {{ pro.name }}
+                    </h4>
+                    <b>Price:</b> {{ pro.price }} $ 
+                    <br><b>All:  </b>{{pro.qty}}<br>
+                    <b>Qunatity: </b><input #Quntity type="number" min="1" value="1" maxlength="2" (focus)="Quntity.value='' " />
+                    <a href="#" class="btn btn-success" (click)="addNewProduct(pro, Quntity.value)"> Add this </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="col-md-6">
+        <div>
+            <div>
+                <table class="table">
+                    <th> Name </th>
+                    <th>Pricce</th>
+                    <th>Quntity</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                    <tr *ngFor="let pro of products">
+                        <td *ngIf="pro.getAdded()==true"> {{pro.name}}</td>
+                        <td *ngIf="pro.getAdded()==true">{{pro.price}}</td>
+                        <td *ngIf="pro.getAdded()==true">{{pro.addedQty}}</td>
+                        <td *ngIf="pro.getAdded()==true">
+                            <a href="#" class="btn btn-warning" (click)="removeProduct(pro)">Remove?! </a>
+                        </td>
+                        <td *ngIf="pro.getAdded()==true">
+                            <a href="#" (click)="Incr(pro)" style="font-weight: bolderl; font-size: 12pt;">Inc</a>
+                            <a href="#" (click)="Decr(pro)"  style="font-weight: bolderl; font-size: 12pt;">Dec</a>
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    SUM= <input type="text" #total value="{{CalculateTotal()}}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
